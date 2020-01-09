@@ -18,6 +18,7 @@ const range = n => Array.apply(null, {length: n}).map((_, i) => i + 1);
 
  // Function that takes repo name and Aunthentication token to make api calls
  async function getStarHistory(repo, token) {
+  resArray = [];
   const axiosGit = axios.create({
     headers: {
       Accept: 'application/vnd.github.v3.star+json',   /// According Git-Hub API Documentation header must have this Type to get timestamped data other wise it will only return users.
