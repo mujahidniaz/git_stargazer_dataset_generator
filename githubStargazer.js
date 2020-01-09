@@ -1,7 +1,8 @@
 const axios = require('axios');
 const sampleNum = 15;
+let waitTime=200;
 
-const token = 'f1a440b319c2b9c4aa9a3afdf30f794e0893eabb';
+const token = '4d5235a5cbc0c47688da990461694a04518a2bcc';
 let resArray=[];
 let catchArray=[];
 
@@ -47,10 +48,16 @@ const range = n => Array.apply(null, {length: n}).map((_, i) => i + 1);
      */
     const link = initRes.headers.link;
     console.log(link);
-  
+    
+    
 
     const pageNum = link ? /next.*?&page=(\d*).*?last/.exec(link)[1] : 1; // total page number
     console.log(pageNum);
+
+    if(pageNum>100)
+    {
+      waitTime=1000;
+    }
     
     
     const pageIndexes = Array.from({length: pageNum}, (v, k) => k+1); 
@@ -74,17 +81,26 @@ let paginArray =  chunkArray(sampleUrls,150)
       
       axiosGit.get(sampleUrls[i])
           .then((response) => {
-            resArray.push(response.data);
+
+            
+           // console.log(response.data[0]);
+            response.data.forEach(element => {
+              let currdata = {repo_name:repo,user:"",starred_at:""};
+             currdata.starred_at= element.starred_at;
+             currdata.user=element.user.login;
+             resArray.push(currdata);
+            });
+            
           }).catch(error => {
             console.log(error);
             catchArray.push(sampleUrls[i]);
           })
       
-      await timer(700); // then the created Promise can be awaited
+      await timer(waitTime); // then the created Promise can be awaited
     }
 
 
-    await timer(1000);
+    await timer(5000);
     var flatArray = Array.prototype.concat(...resArray);
     console.log(catchArray);
 
@@ -92,7 +108,7 @@ let paginArray =  chunkArray(sampleUrls,150)
 
 //     console.log(flatArray[i].starred_at);  
 // }
-console.log(flatArray.length)
+//console.log(flatArray.length)
      
   
     console.log('----------------------------------------finsihed ---------------------------------------')
@@ -101,7 +117,7 @@ console.log(flatArray.length)
  
   
   
-  
+  return resArray
   
 }
 
@@ -125,11 +141,19 @@ function timer(ms) {
 }
  
 
+module.exports = {
 
-(async function() {
-  const history = await getStarHistory('doocs/advanced-java','f1a440b319c2b9c4aa9a3afdf30f794e0893eabb')
+getStarHistory:async function(reponame) {
+
+  var start = new Date()
+  const history = await getStarHistory(reponame,token)
     .catch(err => {
       console.log(err);
     });
-  console.log( history );
-})();
+    var end = new Date() - start
+  console.info('Execution time: %dms', end)
+  return history;
+  //console.log( history );
+}
+
+}
