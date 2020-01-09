@@ -22,9 +22,8 @@ This application provides an easy to use GET API end point which uses Git-Hub pu
 ## Challenges and Limitations:
 
 The task was pretty straight forward but the biggest challenge was to get data efficiently from GitHub api because when API Call is sent to GitHub API to get Starred timestamp and list of users for a given repo. Git Hub paginates the results and sends you the list of URLS that can be used to get data from Github, By default each page returns 30 users and timestamps but it can be tweaked to return maximum of 100 per page. So i have utilized that feature and got 100 records per page instead of 30 which is default, In this way less number of calls will be sent to GitHub API.
-I wanted to send these calls in perallel using asynced functions but according to GitHub API Documentation, All calls should be send sequentially
-and with at least ###1 second### of delay. I have been trying different time delays to check if i could find a generic and optimal delay without triggering the ###ABUSE RATE LIMIT###. So i have found out that for less than 100 request a delay of less than a second can work perfectly but for 
-large number of request you will definatly need a delay of minimum of 1 second.
+I wanted to send these calls in perallel using asynced functions but it resulted in **ABUSE PROTOCOL** according to GitHub API Documentation, All calls should be send sequentially
+and with at least **1 second** of delay. I have been trying different time delays to check if i could find a generic and optimal delay without triggering the **ABUSE RATE LIMIT**. So i have found out that for less than 100 request a delay of less than a second can work perfectly but for large number of request you will definatly need a delay of minimum of 1 second. I also tried to devide the list of URLs into multiple chunks of 100 api calls and tried to send them with lower delay and then after every chunk of 100 i put 2 seconds of delay but still the **ABUSE LIMIT** was reached. 
 Git-Hub Limitation Reference: https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits
 
 
