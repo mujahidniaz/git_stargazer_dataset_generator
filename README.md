@@ -41,4 +41,4 @@ Git-Hub Limitation Reference: https://developer.github.com/v3/guides/best-practi
 7. Put a repositry in the input field and hit the generate data Button. List will show up in the table and you can download it as well using Download Excel / CSV button
 
 ## Demo Video 
-   Please go to watch a live working Demo https://youtu.be/WCJk0pPsuSg on Youtube (Must)
+   Please go to watch a live working Demo https://youtu.be/EbG9GFm2Ssk on Youtube (Must)
