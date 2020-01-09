@@ -21,7 +21,7 @@
 <body>
 <div class="container">
     <div class="row" style="margin-top: 2% ;text-align: center; ">
-    <h1>Generate Github Starred repo dataset </h1>
+    <h1>Generate Git-Hub Starred repo dataset </h1>
     </div>
     <div class="row" style="margin-top: 2%">
         <div class="row">
@@ -30,7 +30,7 @@
             <form class="form-inline mr-auto">
               <input id='user_query' class="form-control" type="text" placeholder="Type username/repo here.." aria-label="Search" style="width:55%">
               <button class="btn btn-primary btn-rounded btn-md my-0 ml-md-3" type="button" style="width: 19%" onclick="SendGet()"  >Generate Dataset</button>
-              <button class="btn btn-primary btn-rounded btn-md my-0 ml-md-3" type="button" style="width: 19%" onclick="tableToExcel('stargazer_table', 'Github Repos Stargazer Data')"  >Download Excel/CSV</button>
+              <button class="btn btn-primary btn-rounded btn-md my-0 ml-md-3" type="button" style="width: 19%" onclick="tableToExcel('stargazer_table', 'Github Repos Stargazer Data')"  >Download Excel / CSV</button>
             </form>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <table id="stargazer_table"  class="table table-bordered table-striped">
             <thead>
             <tr>
-            <th>Repository Name</th><th>Stargazer Username</th><th>Starred Timestamp</th>
+            <th>GitHub Repository</th><th>GitHub Username</th><th>Starred Timestamp</th>
             </tr>
             </thead>
             <tbody id="result_table" >
